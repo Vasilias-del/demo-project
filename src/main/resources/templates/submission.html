@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Demo</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+	<!-- Navigation Bar Here -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle Navigation</span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Demo</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<h1>List of Submission</h1>
+		</div>
+		
+		<div class = "row">
+			<div class = "col-lg-3">
+				<a th:href = "@{/submission/new}" class = "btn btn-primary btn-sm mb-3"> Add Submission</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Module</th>
+					<th>Major Type</th>
+					<th>Main Type</th>
+					<th>Email</th>
+					<th>PDF</th>
+					<th>PNG</th>
+					<th>Date Submitted</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each = "submission: ${submission}">
+					<td th:text = "${submission.module}"></td>
+					<td th:text = "${submission.majorType}"></td>
+					<td th:text = "${submission.mainType}"></td>
+					<td th:text = "${submission.email}"></td>
+					<td><a th:href="@{/pdf/{id}(id=${submission.id})}">Download</a></td>
+					<td><a th:href="@{/png/{id}(id=${submission.id})}">Download</a></td>
+					<td th:text="${#temporals.format(submission.date, 'dd MMMM yyyy HH:mm')}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

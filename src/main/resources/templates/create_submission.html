@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Demo</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+	<!-- Navigation Bar Here -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle Navigation</span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Demo</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	
+	<div class = "container">
+		<div class = "row"> 
+			<div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class = "text-center">Create New Submission</h1>
+				<div class = "card-body">
+					<form th:action="@{/submission}" th:object="${submission}" method="POST">
+						<div th:if="${param.error}">
+							<div class = "alert alert-danger">
+								Invalid submission.
+							</div>
+						</div>
+						<div class = "form-group">
+							<label>Module</label>
+							<select 
+								id="dropdown" 
+								name="module" 
+								th:field = "*{module}"
+								class = "form-control"
+							>
+							  <option value="1">Module 1</option>
+							  <option value="2">Module 2</option>
+							</select>
+						</div>
+						<div class = "form-group">
+							<label>Major Type</label>
+							<select 
+								id="dropdown" 
+								name="majorType" 
+								th:field = "*{majorType}"
+								class = "form-control"
+							>
+							  <option value="1">Major Type 1</option>
+							  <option value="2">Major Type 2</option>
+							</select>
+						</div>
+						<div class = "form-group">
+							<label>Main Type</label>
+							<select 
+								id="dropdown" 
+								name="mainType" 
+								th:field = "*{mainType}"
+								class = "form-control"
+							>
+							  <option value="1">Main Type 1</option>
+							  <option value="2">Main Type 2</option>
+							</select>
+						</div>
+						<div class = "footer-body">
+							<button type="submit" class="btn btn-primary">
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
